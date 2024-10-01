@@ -1,0 +1,1 @@
+﻿# Tools and Skills for .NET 8 Practices By Juan Gomez
