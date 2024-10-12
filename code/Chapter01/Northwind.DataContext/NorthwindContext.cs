@@ -74,10 +74,32 @@ public partial class NorthwindContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Database=Northwind;User Id=sa;Password=Tetra714217;TrustServerCertificate=True;");
+            // Create a new SqlConnectionStringBuilder instance
+            SqlConnectionStringBuilder builder = new();
+
+            // Set the data source to the local server
+            builder.DataSource = "localhost";
+            
+            // Set the initial catalog (database name) to Northwind
+            builder.InitialCatalog = "Northwind";
+            
+            // Trust the server certificate
+            builder.TrustServerCertificate = true;
+            
+            // Enable Multiple Active Result Sets (MARS)
+            builder.MultipleActiveResultSets = true;
+
+            // Set the command timeout to 3 seconds
+            builder.CommandTimeout = 3;
+            
+            // Set the user ID and password from environment variables
+            builder.UserID = Environment.GetEnvironmentVariable("DB_USER_ID");
+            builder.Password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            
+            // Set the integrated security to true
+            optionsBuilder.UseSqlServer(builder.ConnectionString);
         }
     }
-        //=> optionsBuilder.UseSqlServer("Data Source=localhost;Database=Northwind;User Id=sa;Password=Tetra714217;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
