@@ -19,7 +19,7 @@ public static class NorthwindContextExtensions
         {
             SqlConnectionStringBuilder builder = new();
             
-            builder.DataSource = Environment.MachineName;
+            builder.DataSource = ".";
             builder.InitialCatalog = "Northwind";
             builder.IntegratedSecurity = true;
             builder.MultipleActiveResultSets = true;
@@ -27,8 +27,8 @@ public static class NorthwindContextExtensions
             // Because we want to fail fast. Default is 15 seconds.
             builder.IntegratedSecurity = true;
             
-            builder.UserID = Environment.GetEnvironmentVariable("SQL_USERNAME");
-            builder.Password = Environment.GetEnvironmentVariable("SQL_PWD");
+            builder.UserID = Environment.GetEnvironmentVariable("DB_USER_ID");
+            builder.Password = Environment.GetEnvironmentVariable("DB_PASSWORD");
             
             connectionString = builder.ConnectionString;
         }

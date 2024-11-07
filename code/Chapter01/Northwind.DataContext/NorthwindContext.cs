@@ -76,7 +76,7 @@ public partial class NorthwindContext : DbContext
             SqlConnectionStringBuilder builder = new();
 
             // Set the data source to the local server
-            builder.DataSource = "localhost";
+            builder.DataSource = ".";
             
             // Set the initial catalog (database name) to Northwind
             builder.InitialCatalog = "Northwind";
@@ -94,7 +94,6 @@ public partial class NorthwindContext : DbContext
             builder.UserID = Environment.GetEnvironmentVariable("DB_USER_ID");
             builder.Password = Environment.GetEnvironmentVariable("DB_PASSWORD");
             
-            // Set the integrated security to true
             optionsBuilder.UseSqlServer(builder.ConnectionString);
         }
     }
